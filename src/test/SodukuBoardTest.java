@@ -1,11 +1,6 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
-
-import main.SodukuBoard;
-import main.SodukuBoardCell;
 
 class SodukuBoardTest {
 
@@ -23,14 +18,7 @@ class SodukuBoardTest {
 				 {0,0,0,5,0,3,0,0,0},
 				 {0,0,2,0,9,0,5,0,0}};
 				 
-		SodukuBoard board = new SodukuBoard(9, 9, givenBoard);
-		SodukuBoardCell[][] cells = board.getBoardAsCells();
 		
-		assertEquals(7, cells[0][2].getCellValue(), "incorrect value");
-		assertEquals(9, cells[2][3].getCellValue(), "incorrect value");
-		assertEquals(5, cells[4][8].getCellValue(), "incorrect value");
-		assertEquals(4, cells[2][0].getCellValue(), "incorrect value");
-		assertEquals(2, cells[8][2].getCellValue(), "incorrect value");
 	}
 
 }
