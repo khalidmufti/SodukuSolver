@@ -1,3 +1,4 @@
+package main;
 /**
  * 
  */
@@ -15,17 +16,18 @@ public class SodukuBoardCell {
 	 * @param numberInCell
 	 * @param fixedValue
 	 */
-	public SodukuBoardCell(int givenValueInCell) {
-		this.numberInCell = givenValueInCell;
-		this.fixedValue = true;
-	}
-
-	/**
-	 * @param numberInCell
-	 * @param fixedValue
-	 */
 	public SodukuBoardCell() {
 		this.numberInCell = 0;
 		this.fixedValue = false;
 	}
+	
+	public void setFixedValue (int cellValueGiven) {
+		numberInCell = cellValueGiven;
+		this.fixedValue = true;
+	}
+
+	public int getCellValue () {
+		return numberInCell;
+	}
+
 }
