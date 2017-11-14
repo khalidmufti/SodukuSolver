@@ -35,7 +35,7 @@ class SodukuBoardTest {
 				 {3,7,9,6,8,2,1,5,4}};
 
 		try {
-			int solution1[][] = SodukuBoard.findSolution(givenBoard1, false);
+			int solution1[][] = SodukuBoard.findSolution(givenBoard1, null);
 			assertEquals(true, SodukuBoard.areTwoBoardsEqual(givenBoard1Solved, solution1));	
 
 		}
@@ -71,7 +71,7 @@ class SodukuBoardTest {
 				 {5,2,1,8,3,9,7,6,4}};
 				 
 		try {
-			int solution2[][] = SodukuBoard.findSolution(givenBoard2, false);
+			int solution2[][] = SodukuBoard.findSolution(givenBoard2, null);
 			assertEquals(true, SodukuBoard.areTwoBoardsEqual(givenBoard2Solved, solution2));	
 		}
 		

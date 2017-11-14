@@ -1,4 +1,7 @@
 package main;
+
+import javax.swing.JTextArea;
+
 /**
  * 
  */
@@ -14,7 +17,7 @@ public final class SodukuBoard {
 	
 	private static int[][] solution;
 	
-	public static int[][] findSolution (int[][] initialValues, boolean showProgress) 
+	public static int[][] findSolution (int[][] initialValues, JTextArea showProgress) 
 		throws NoSolutionFoundException { 
 	
 		if (recursiveSolve(0, 0, initialValues, showProgress)) {
@@ -26,9 +29,11 @@ public final class SodukuBoard {
 		}
 	}
 	
-	private static boolean recursiveSolve (int xPos, int yPos, int[][] board, boolean showProgress) { 
+	private static boolean recursiveSolve (int xPos, int yPos, int[][] board, JTextArea showProgress) { 
 		
-		//TODO use showProgress
+		if (showProgress != null) {
+			printBoard(board, showProgress);
+		} 
 		
 		//We will traverse row across first.  This bit of code resets to first column if we are on a new row.
 		//Checks if we have gone through the last row then a solution was found so return.
@@ -44,7 +49,7 @@ public final class SodukuBoard {
 			}
 		}
 	
-		//Make sure the value in the cell is "0"; otherwise skip.
+		//Make sure the value in the cell is "0"; otherwise skip and move on to next column.
 		if (board[xPos][yPos] != 0) {
 			return recursiveSolve(xPos, yPos + 1, board, showProgress);
 		}
@@ -52,9 +57,18 @@ public final class SodukuBoard {
 		//Otherwise iterate through the possible values (1..9) and recursively see if the value is okay
 		for (int value = 1; value <= 9; value++) {
 			boolean check = isValueValid(xPos, yPos, value, board);
+			if (showProgress != null) {
+				printBoard(board, showProgress);
+			}
+			
 			//if check passed then set value for cell and move on to next column
 			if (check == true) {
 				board[xPos][yPos] = value;
+				
+				if (showProgress != null) {
+					printBoard(board, showProgress);
+				}
+				
 				if (recursiveSolve(xPos, yPos + 1, board, showProgress) == true) {
 					return true;
 				}
@@ -114,4 +128,23 @@ public final class SodukuBoard {
 		return true;
 	}
 	
+	public static void printBoard (int[][] board, JTextArea textArea) {
+		
+		if (textArea == null) {
+			return;
+		}
+			
+		StringBuffer boardOutput = new StringBuffer();
+		for (int x=0; x<NUM_ROWS; x++  ) {
+
+			for (int y=0; y<NUM_COLS; y++  ) {
+				boardOutput.append(board[x][y]);
+				boardOutput.append (" | ");
+			}
+
+			boardOutput.append ("\n");
+		}
+		
+		textArea.setText(boardOutput.toString());
+	}
 }
